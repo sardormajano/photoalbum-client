@@ -1,5 +1,9 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { authService } from '../shared/services';
+import { ROUTES } from '../shared/constants';
 
 export function SignOut() {
-  return <div>This is a sign-out page!</div>;
+  authService.signOut();
+  return <Redirect to={ROUTES.SIGN_IN} />;
 }

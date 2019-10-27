@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { authService } from '../shared/services';
+import { ROUTES } from '../shared/constants';
 
 export class SignUp extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      firstName: '',
-      lastName: '',
+      isAuthorized: false,
+      name: '',
       password: '',
       passwordConfirm: '',
       email: ''
@@ -19,13 +21,23 @@ export class SignUp extends Component {
     return password && password === passwordConfirm && email;
   }
 
-  submitHandler(event) {
+  async submitHandler(event) {
     event.preventDefault();
-    const { password, email, firstName, lastName } = this.state;
-    authService.signUp({ password, email, firstName, lastName });
+    const { password, email, name } = this.state;
+    await authService.signUp({
+      password,
+      email,
+      name
+    });
+
+    this.setState({ isAuthorized: authService.isAuthorized() });
   }
 
   render() {
+    if (this.state.isAuthorized) {
+      return <Redirect to={ROUTES.GALLERY} />;
+    }
+
     return (
       <div className='container'>
         <div className='row'>
@@ -36,32 +48,17 @@ export class SignUp extends Component {
               <br />
               <form onSubmit={event => this.submitHandler(event)}>
                 <div className='row'>
-                  <div className='input-field col s6'>
+                  <div className='input-field col s12'>
                     <input
                       placeholder='Sardorbek'
                       type='text'
-                      className='validate'
-                      value={this.state.firstName}
+                      value={this.state.name}
                       onChange={event =>
-                        this.setState({ firstName: event.target.value })
+                        this.setState({ name: event.target.value })
                       }
                     />
                     <label htmlFor='first_name' className='active'>
-                      First Name
-                    </label>
-                  </div>
-                  <div className='input-field col s6'>
-                    <input
-                      placeholder='Mamazhanov'
-                      type='text'
-                      className='validate'
-                      value={this.state.lastName}
-                      onChange={event =>
-                        this.setState({ lastName: event.target.value })
-                      }
-                    />
-                    <label htmlFor='first_name' className='active'>
-                      Second Name
+                      Name
                     </label>
                   </div>
                 </div>

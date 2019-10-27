@@ -1,14 +1,32 @@
+import axios from 'axios';
+import { BE, ROUTES } from '../constants';
+
+const token = localStorage.getItem('token');
+axios.defaults.headers.common['Authorization'] = token
+  ? `Bearer ${token}`
+  : null;
+axios.defaults.baseURL = BE;
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+
 export const authService = {
-  signUp(userData) {
-    console.log(`signing up ${JSON.stringify(userData)}`);
+  async signUp(userData) {
+    const { data } = await axios.post(ROUTES.SIGN_UP, userData);
+    const { token } = data;
+    if (token) {
+      this.setToken(token);
+    }
   },
 
-  signIn(userData) {
-    console.log(`signing in ${JSON.stringify(userData)}`);
+  async signIn(userData) {
+    const { data } = await axios.post(ROUTES.SIGN_IN, userData);
+    const { token } = data;
+    if (token) {
+      this.setToken(token);
+    }
   },
 
   signOut() {
-    localStorage.removeItem('token');
+    this.removeToken();
   },
 
   isAuthorized() {
@@ -21,5 +39,11 @@ export const authService = {
 
   setToken(token) {
     localStorage.setItem('token', token);
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  },
+
+  removeToken() {
+    localStorage.removeItem('token');
+    axios.defaults.headers.common['Authorization'] = null;
   }
 };

@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+
 import { authService } from '../shared/services';
+import { ROUTES } from '../shared/constants';
 
 export class SignIn extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      isAuthorized: false,
       password: '',
       email: ''
     };
@@ -16,12 +20,22 @@ export class SignIn extends Component {
     return password && email;
   }
 
-  submitHandler(event) {
+  async submitHandler(event) {
     event.preventDefault();
-    authService.signIn(this.state);
+    const { password, email } = this.state;
+    await authService.signIn({
+      password,
+      email
+    });
+
+    this.setState({ isAuthorized: authService.isAuthorized() });
   }
 
   render() {
+    if (this.state.isAuthorized) {
+      return <Redirect to={ROUTES.GALLERY} />;
+    }
+
     return (
       <div className='container'>
         <div className='row'>
