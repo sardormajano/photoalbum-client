@@ -26,9 +26,19 @@ function NavbarWithRouter({ location }) {
               Gallery
             </NavLink>
           </li>
+          <li className={pathname === ROUTES.SIGN_IN ? 'active' : null}>
+            <NavLink exact={true} activeClassName='active' to={ROUTES.SIGN_IN}>
+              Sign in
+            </NavLink>
+          </li>
           <li className={pathname === ROUTES.SIGN_OUT ? 'active' : null}>
             <NavLink exact={true} activeClassName='active' to={ROUTES.SIGN_OUT}>
               Sign out
+            </NavLink>
+          </li>
+          <li className={pathname === ROUTES.SIGN_UP ? 'active' : null}>
+            <NavLink exact={true} activeClassName='active' to={ROUTES.SIGN_UP}>
+              Sign up
             </NavLink>
           </li>
         </ul>

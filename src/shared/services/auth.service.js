@@ -1,6 +1,6 @@
-const authService = {
-  signUp(username, password) {
-    console.log('signing up');
+export const authService = {
+  signUp(userData) {
+    console.log(userData);
   },
 
   signIn(username, password) {
