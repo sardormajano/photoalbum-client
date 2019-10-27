@@ -1,10 +1,10 @@
 export const authService = {
   signUp(userData) {
-    console.log(userData);
+    console.log(`signing up ${JSON.stringify(userData)}`);
   },
 
-  signIn(username, password) {
-    console.log('signing in');
+  signIn(userData) {
+    console.log(`signing in ${JSON.stringify(userData)}`);
   },
 
   signOut() {

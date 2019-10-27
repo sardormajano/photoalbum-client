@@ -16,7 +16,7 @@ export class SignUp extends Component {
 
   isFormValid() {
     const { password, passwordConfirm, email } = this.state;
-    return password.length && password === passwordConfirm && email;
+    return password && password === passwordConfirm && email;
   }
 
   submitHandler(event) {
@@ -70,7 +70,6 @@ export class SignUp extends Component {
                     <input
                       id='password'
                       type='password'
-                      className='validate'
                       value={this.state.password}
                       onChange={event =>
                         this.setState({ password: event.target.value })
@@ -84,7 +83,6 @@ export class SignUp extends Component {
                     <input
                       id='password-confirm'
                       type='password'
-                      className='validate'
                       value={this.state.passwordConfirm}
                       onChange={event =>
                         this.setState({ passwordConfirm: event.target.value })
@@ -100,7 +98,6 @@ export class SignUp extends Component {
                     <input
                       id='email'
                       type='email'
-                      className='validate'
                       value={this.state.email}
                       onChange={event =>
                         this.setState({ email: event.target.value })
@@ -109,13 +106,6 @@ export class SignUp extends Component {
                     <label htmlFor='email' className='active'>
                       Email (Login)
                     </label>
-                    <span
-                      className='helper-text'
-                      data-error='wrong'
-                      data-success='right'
-                    >
-                      Helper text
-                    </span>
                   </div>
                 </div>
                 <div className='row'>
