@@ -1,9 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Navbar, PrivateRoute, PublicRoute } from './shared/components';
-import { Gallery, ImageUpload, SignUp, SignOut, SignIn } from './pages';
+import { Gallery, SignUp, SignOut, SignIn } from './pages';
+import { ImageUpload } from './pages/image-upload';
 import { ROUTES } from './shared/constants';
 
+import 'materialize-css/dist/css/materialize.min.css';
+import 'toastr/build/toastr.min.css';
 import './App.css';
 
 function App() {
