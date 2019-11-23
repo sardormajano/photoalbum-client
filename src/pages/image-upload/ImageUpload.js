@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { UploadForm } from './UploadForm';
 import { UploadPreview } from './UploadPreview';
-import { httpService } from '../../shared/services/http.service';
+import { httpService } from '../../shared/services';
 import { ROUTES } from '../../shared/constants/routes';
 import toastr from 'toastr';
 
@@ -57,6 +57,7 @@ export class ImageUpload extends Component {
     } catch (err) {
       toastr.error('Error while uploading images');
       console.error(err);
+      this.setState({ isFormDisabled: false });
     }
   }
 

@@ -8,9 +8,9 @@ function NavbarWithRouter({ location }) {
   const links = authService.isAuthorized()
     ? [
         {
-          isActive: pathname === ROUTES.GALLERY,
-          to: ROUTES.GALLERY,
-          label: 'Gallery'
+          isActive: pathname === ROUTES.IMAGES,
+          to: ROUTES.IMAGES,
+          label: 'Images'
         },
         {
           isActive: pathname === ROUTES.IMAGE_UPLOAD,
@@ -48,7 +48,7 @@ function NavbarWithRouter({ location }) {
   return (
     <nav>
       <div className='nav-wrapper'>
-        <a href='/gallery' className='brand-logo'>
+        <a href={ROUTES.IMAGES} className='brand-logo'>
           &nbsp; MPhA
         </a>
         <ul id='nav-mobile' className='right hide-on-med-and-down'>

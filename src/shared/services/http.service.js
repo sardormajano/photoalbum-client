@@ -9,8 +9,8 @@ export const httpService = {
     return axios.post(url, formData, { headers });
   },
 
-  get(url) {
-    return axios.get(url);
+  get(url, params = {}) {
+    return axios({ url, params });
   },
 
   toFormData(data) {
