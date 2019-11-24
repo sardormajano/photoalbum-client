@@ -20,6 +20,10 @@ export const dateService = {
   },
 
   parseDate(date, format) {
+    if (!date) {
+      return;
+    }
+
     let year, month, day;
 
     switch (format) {
@@ -35,6 +39,10 @@ export const dateService = {
   },
 
   parseToIntDate(date, format) {
+    if (!date) {
+      return;
+    }
+
     return this.parseDate(date, format).getTime();
   }
 };

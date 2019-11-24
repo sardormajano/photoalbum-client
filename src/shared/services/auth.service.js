@@ -23,6 +23,8 @@ export const authService = {
     if (token) {
       this.setToken(token);
     }
+
+    return data;
   },
 
   signOut() {

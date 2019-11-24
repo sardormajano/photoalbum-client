@@ -48,12 +48,10 @@ function NavbarWithRouter({ location }) {
   return (
     <nav>
       <div className='nav-wrapper'>
-        <a href={ROUTES.IMAGES} className='brand-logo'>
+        <a href={ROUTES.IMAGES} className='brand-logo hide-on-small-only'>
           &nbsp; MPhA
         </a>
-        <ul id='nav-mobile' className='right hide-on-med-and-down'>
-          {renderLinks()}
-        </ul>
+        <ul className='right'>{renderLinks()}</ul>
       </div>
     </nav>
   );

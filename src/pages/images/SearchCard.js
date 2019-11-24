@@ -8,9 +8,8 @@ export const SearchCard = ({
   isVisible,
   isLoading
 }) => {
-  const now = dateService.formatDate(new Date(), DATE_FORMATS.INPUT);
-  const [periodStart, setPeriodStart] = useState(now);
-  const [periodEnd, setPeriodEnd] = useState(now);
+  const [periodStart, setPeriodStart] = useState('');
+  const [periodEnd, setPeriodEnd] = useState('');
   const [tags, setTags] = useState('');
 
   return (
@@ -79,7 +78,7 @@ export const SearchCard = ({
               className='waves-effect red lighten-1 btn'
               onClick={() =>
                 searchHandler({
-                  tags,
+                  tags: tags.split(' '),
                   periodStart: dateService.parseToIntDate(
                     periodStart,
                     DATE_FORMATS.INPUT

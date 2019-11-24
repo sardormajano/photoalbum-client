@@ -35,14 +35,14 @@ export class SignUp extends Component {
 
   render() {
     if (this.state.isAuthorized) {
-      return <Redirect to={ROUTES.GALLERY} />;
+      return <Redirect to={ROUTES.IMAGES} />;
     }
 
     return (
-      <div className='container'>
+      <div className='section'>
         <div className='row'>
-          <div className='col s10  offset-s1'>
-            <div id='input' className='section scrollspy'>
+          <div className='col s12'>
+            <div id='input' className='scrollspy'>
               <h3 className='header'>Please create an account</h3>
               <p></p>
               <br />
@@ -63,7 +63,7 @@ export class SignUp extends Component {
                   </div>
                 </div>
                 <div className='row'>
-                  <div className='input-field col s6'>
+                  <div className='input-field col s12 m6'>
                     <input
                       id='password'
                       type='password'
@@ -76,7 +76,7 @@ export class SignUp extends Component {
                       Password
                     </label>
                   </div>
-                  <div className='input-field col s6'>
+                  <div className='input-field col s12 m6'>
                     <input
                       id='password-confirm'
                       type='password'

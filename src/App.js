@@ -16,7 +16,7 @@ function App() {
       <div className='section'>
         <Switch>
           <PrivateRoute path={ROUTES.IMAGE_UPLOAD} component={ImageUpload} />
-          <PrivateRoute path={ROUTES.Images} component={Images} />
+          <PrivateRoute path={ROUTES.IMAGES} component={Images} />
           <PublicRoute path={ROUTES.SIGN_IN} component={SignIn} />
           <PrivateRoute path={ROUTES.SIGN_OUT} component={SignOut} />
           <PublicRoute path={ROUTES.SIGN_UP} component={SignUp} />

@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 import { authService } from '../shared/services';
 import { ROUTES } from '../shared/constants';
+import toastr from 'toastr';
 
 export class SignIn extends Component {
   constructor(props) {
@@ -21,32 +22,37 @@ export class SignIn extends Component {
   }
 
   async submitHandler(event) {
-    event.preventDefault();
-    const { password, email } = this.state;
-    await authService.signIn({
-      password,
-      email
-    });
+    try {
+      event.preventDefault();
+      const { password, email } = this.state;
+      await authService.signIn({
+        password,
+        email
+      });
 
-    this.setState({ isAuthorized: authService.isAuthorized() });
+      toastr.success('Welcome!');
+      this.setState({ isAuthorized: authService.isAuthorized() });
+    } catch (err) {
+      toastr.error(err);
+    }
   }
 
   render() {
     if (this.state.isAuthorized) {
-      return <Redirect to={ROUTES.GALLERY} />;
+      return <Redirect to={ROUTES.IMAGES} />;
     }
 
     return (
-      <div className='container'>
+      <div className='section'>
         <div className='row'>
-          <div className='col s10  offset-s1'>
-            <div id='input' className='section scrollspy'>
+          <div className='col s12'>
+            <div id='input' className='scrollspy'>
               <h3 className='header'>Please sign in</h3>
               <p></p>
               <br />
               <form onSubmit={event => this.submitHandler(event)}>
                 <div className='row'>
-                  <div className='input-field col s6'>
+                  <div className='input-field col s12 md6'>
                     <input
                       id='email'
                       type='email'
@@ -59,7 +65,7 @@ export class SignIn extends Component {
                       Email (Login)
                     </label>
                   </div>
-                  <div className='input-field col s6'>
+                  <div className='input-field col s12 md6'>
                     <input
                       id='password'
                       type='password'
@@ -80,7 +86,7 @@ export class SignIn extends Component {
                       className='waves-effect waves-light btn blue darken-4'
                       disabled={!this.isFormValid()}
                     >
-                      Sign up<i className='material-icons right'>account_box</i>
+                      Sign in<i className='material-icons right'>account_box</i>
                     </button>
                   </div>
                 </div>

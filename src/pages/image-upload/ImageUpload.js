@@ -40,7 +40,10 @@ export class ImageUpload extends Component {
     const metadata = this.state.imageFiles.reduce(
       (prev, curr) => ({
         ...prev,
-        [curr.name]: { lastModified: curr.lastModified, tags: this.state.tags }
+        [curr.name]: {
+          lastModified: curr.lastModified,
+          tags: this.state.tags.split(' ')
+        }
       }),
       {}
     );

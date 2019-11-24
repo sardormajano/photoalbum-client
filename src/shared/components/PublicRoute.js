@@ -10,7 +10,7 @@ export const PublicRoute = ({ component: Component, ...rest }) => (
       !authService.isAuthorized() ? (
         <Component {...props} />
       ) : (
-        <Redirect to={ROUTES.GALLERY} />
+        <Redirect to={ROUTES.IMAGES} />
       )
     }
   />

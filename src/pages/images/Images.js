@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { httpService } from '../../shared/services';
 import { ROUTES } from '../../shared/constants';
 import { SearchCard } from './SearchCard';
+import toastr from 'toastr';
 
 const floatingButtonStyle = {
   position: 'fixed',
@@ -14,7 +15,7 @@ const defaultState = {
   images: [],
   tags: '',
   isSearchLoading: false,
-  isSearchVisible: false
+  isSearchVisible: true
 };
 
 export class Images extends Component {
@@ -25,20 +26,27 @@ export class Images extends Component {
   }
 
   searchHandler(params) {
-    httpService.get(ROUTES.IMAGES, params).then(({ data: images }) =>
-      this.setState({
-        images,
-        isSearchVisible: false,
-        isSearchLoading: false
+    httpService
+      .get(ROUTES.IMAGES, params)
+      .then(({ data: images }) => {
+        toastr.success(`Found: ${images.length}`);
+        this.setState({
+          images,
+          isSearchVisible: false,
+          isSearchLoading: false
+        });
       })
-    );
+      .catch(err => {
+        toastr.error(err);
+        this.setState({ isSearchLoading: false });
+      });
     this.setState({ isSearchLoading: true });
   }
 
   renderImages(images) {
     return images.map(image => (
       <div className='col s4 m3 l2' key={image._id}>
-        <a target='_blank' href={image.mediaLink}>
+        <a target='_blank' rel='noopener noreferrer' href={image.mediaLink}>
           <img
             className='responsive-img hoverable'
             alt={image.name}
